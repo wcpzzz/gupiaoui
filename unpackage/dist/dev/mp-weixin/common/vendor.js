@@ -360,7 +360,7 @@ var baseApi = /*#__PURE__*/Object.freeze({
   removeInterceptor: removeInterceptor });
 
 
-var previewImage = {
+var predivImage = {
   args: function args(fromArgs) {
     var currentIndex = parseInt(fromArgs.current);
     if (isNaN(currentIndex)) {
@@ -395,7 +395,7 @@ var previewImage = {
 
 
 var protocols = {
-  previewImage: previewImage };
+  predivImage: predivImage };
 
 var todos = [
 'vibrate'];
@@ -1054,7 +1054,7 @@ function handleEvent(event) {var _this = this;
   if (!dataset) {
     return console.warn("\u4E8B\u4EF6\u4FE1\u606F\u4E0D\u5B58\u5728");
   }
-  var eventOpts = dataset.eventOpts || dataset['event-opts']; // 支付宝 web-view 组件 dataset 非驼峰
+  var eventOpts = dataset.eventOpts || dataset['event-opts']; // 支付宝 web-div 组件 dataset 非驼峰
   if (!eventOpts) {
     return console.warn("\u4E8B\u4EF6\u4FE1\u606F\u4E0D\u5B58\u5728");
   }
@@ -1195,7 +1195,7 @@ function parseBaseApp(vm, _ref3)
   return appOptions;
 }
 
-var mocks = ['__route__', '__wxExparserNodeId__', '__wxWebviewId__'];
+var mocks = ['__route__', '__wxExparserNodeId__', '__wxWebdivId__'];
 
 function findVmByVueId(vm, vuePid) {
   var $children = vm.$children;
@@ -3446,7 +3446,7 @@ var timerFunc;
 // The nextTick behavior leverages the microtask queue, which can be accessed
 // via either native Promise.then or MutationObserver.
 // MutationObserver has wider support, however it is seriously bugged in
-// UIWebView in iOS >= 9.3.3 when triggered in touch event handlers. It
+// UIWebdiv in iOS >= 9.3.3 when triggered in touch event handlers. It
 // completely stops working after triggering a few times... so, if native
 // Promise is available, we will use it:
 /* istanbul ignore next, $flow-disable-line */
@@ -3454,7 +3454,7 @@ if (typeof Promise !== 'undefined' && isNative(Promise)) {
   var p = Promise.resolve();
   timerFunc = function () {
     p.then(flushCallbacks);
-    // In problematic UIWebViews, Promise.then doesn't completely break, but
+    // In problematic UIWebdivs, Promise.then doesn't completely break, but
     // it can get stuck in a weird state where callbacks are pushed into the
     // microtask queue but the queue isn't being flushed, until the browser
     // needs to do some other work, e.g. handle a timer. Therefore we can
@@ -5767,7 +5767,7 @@ function callUpdatedHooks (queue) {
  */
 function queueActivatedComponent (vm) {
   // setting _inactive to false here so that a render function can
-  // rely on checking whether it's in an inactive tree (e.g. router-view)
+  // rely on checking whether it's in an inactive tree (e.g. router-div)
   vm._inactive = false;
   activatedChildren.push(vm);
 }
@@ -6089,7 +6089,7 @@ function initProps (vm, propsOptions) {
             }
             //fixed by xxxxxx __next_tick_pending,uni://form-field 时不告警
             if(
-                key === 'value' && 
+                key === 'value' &&
                 Array.isArray(vm.$options.behaviors) &&
                 vm.$options.behaviors.indexOf('uni://form-field') !== -1
               ){
@@ -6101,7 +6101,7 @@ function initProps (vm, propsOptions) {
             var $parent = vm.$parent;
             while($parent){
               if($parent.__next_tick_pending){
-                return  
+                return
               }
               $parent = $parent.$parent;
             }
@@ -6429,10 +6429,10 @@ function initMixin (Vue) {
     initEvents(vm);
     initRender(vm);
     callHook(vm, 'beforeCreate');
-    vm.mpHost !== 'mp-toutiao' && initInjections(vm); // resolve injections before data/props  
+    vm.mpHost !== 'mp-toutiao' && initInjections(vm); // resolve injections before data/props
     initState(vm);
     vm.mpHost !== 'mp-toutiao' && initProvide(vm); // resolve provide after data/props
-    vm.mpHost !== 'mp-toutiao' && callHook(vm, 'created');      
+    vm.mpHost !== 'mp-toutiao' && callHook(vm, 'created');
 
     /* istanbul ignore if */
     if ( true && config.performance && mark) {
@@ -7087,7 +7087,7 @@ var patch = function(oldVnode, vnode) {
     } catch (err) {
       console.error(err);
     }
-    data.__webviewId__ = mpInstance.data.__webviewId__;
+    data.__webdivId__ = mpInstance.data.__webdivId__;
     var mpData = Object.create(null);
     Object.keys(data).forEach(function (key) { //仅同步 data 中有的数据
       mpData[key] = mpInstance.data[key];
@@ -7147,7 +7147,7 @@ function mountComponent$1(
       }
     }
   }
-  
+
   vm.mpHost !== 'mp-toutiao' && callHook(vm, 'beforeMount');
 
   var updateComponent = function () {
@@ -7393,7 +7393,7 @@ var LIFECYCLE_HOOKS$1 = [
     'onLaunch',
     'onShow',
     'onHide',
-    'onUniNViewMessage',
+    'onUniNdivMessage',
     'onError',
     //Page
     'onLoad',
@@ -7455,7 +7455,7 @@ Vue.prototype.__patch__ = patch;
 // public mount method
 Vue.prototype.$mount = function(
     el ,
-    hydrating 
+    hydrating
 ) {
     return mountComponent$1(this, el, hydrating)
 };
@@ -7501,9 +7501,9 @@ module.exports = g;
 
 /***/ }),
 /* 4 */
-/*!***************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/HBuilderProjects/gupiao/pages.json ***!
-  \***************************************************************************/
+/*!*****************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/HBuilderProjects/gupiaoui/pages.json ***!
+  \*****************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -7907,8 +7907,8 @@ Util = /*#__PURE__*/function () {
       var routepath = getRoute();
       this._navigationBarTitle.config = PagesJson &&
       PagesJson.pages[routepath] &&
-      PagesJson.pages[routepath].titleNView &&
-      PagesJson.pages[routepath].titleNView.titleText ||
+      PagesJson.pages[routepath].titleNdiv &&
+      PagesJson.pages[routepath].titleNdiv.titleText ||
       PagesJson &&
       PagesJson.pages[routepath] &&
       PagesJson.pages[routepath].navigationBarTitleText || '';
@@ -8408,20 +8408,20 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 
 /***/ }),
 /* 7 */
-/*!********************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/HBuilderProjects/gupiao/pages.json?{"type":"style"} ***!
-  \********************************************************************************************/
+/*!**********************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/HBuilderProjects/gupiaoui/pages.json?{"type":"style"} ***!
+  \**********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "uni-app" } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/login/register": { "navigationBarTitleText": "uni-app", "usingComponents": { "title-with-img": "/components/form/title-with-img", "common-input": "/components/form/common-input", "input-with-img": "/components/form/input-with-img", "title-with-icon": "/components/form/title-with-icon", "singel-picker": "/components/form/singel-picker", "mult-selector": "/components/form/mult-selector", "color-selector": "/components/color-selector" } }, "pages/index/index": { "navigationBarTitleText": "uni-app", "usingComponents": {} } }, "globalStyle": { "navigationBarTextStyle": "black", "navigationBarTitleText": "uni-app", "navigationBarBackgroundColor": "#F8F8F8", "backgroundColor": "#F8F8F8" } };exports.default = _default;
 
 /***/ }),
 /* 8 */
-/*!*******************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/HBuilderProjects/gupiao/pages.json?{"type":"stat"} ***!
-  \*******************************************************************************************/
+/*!*********************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/HBuilderProjects/gupiaoui/pages.json?{"type":"stat"} ***!
+  \*********************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -8542,54 +8542,42 @@ function normalizeComponent (
 /***/ }),
 /* 15 */,
 /* 16 */,
-/* 17 */,
-/* 18 */,
-/* 19 */,
-/* 20 */,
-/* 21 */,
-/* 22 */,
-/* 23 */,
-/* 24 */,
-/* 25 */
-/*!******************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/HBuilderProjects/gupiao/common/api.js ***!
-  \******************************************************************************/
+/* 17 */
+/*!********************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/HBuilderProjects/gupiaoui/common/api.js ***!
+  \********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.gupiaoAll = void 0;var _httpUtils = _interopRequireDefault(__webpack_require__(/*! @/utils/http-utils.js */ 26));
-var _httpConfig = _interopRequireDefault(__webpack_require__(/*! @/common/http-config.js */ 27));
-var _sign = _interopRequireDefault(__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module '@/utils/sign.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
-var _payArgs = _interopRequireDefault(__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module '@/common/pay-args.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+Object.defineProperty(exports, "__esModule", { value: true });exports.gupiao = void 0;var _httpUtils = _interopRequireDefault(__webpack_require__(/*! @/utils/http-utils.js */ 18));
+var _httpConfig = _interopRequireDefault(__webpack_require__(/*! @/common/http-config.js */ 19));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
-/**
-                                                                                                                                                                      * 登录
-                                                                                                                                                                      */
-var gupiaoAll = function gupiaoAll() {
+
+var gupiao = function gupiao() {
   return new Promise(function (resolve, reject) {
     var request = {};
     // request.userCode = userCode;
     // request.password = password;
-    _httpUtils.default.Post(request, _httpConfig.default.interfaces.gupiao).
+    _httpUtils.default.get(request, _httpConfig.default.interfaces.gupiao).
     then(function (response) {
       resolve(response);
-    });
+    }).catch(function () {return console.log('gg');});
   });
-};exports.gupiaoAll = gupiaoAll;
+};exports.gupiao = gupiao;
 
 /***/ }),
-/* 26 */
-/*!************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/HBuilderProjects/gupiao/utils/http-utils.js ***!
-  \************************************************************************************/
+/* 18 */
+/*!**************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/HBuilderProjects/gupiaoui/utils/http-utils.js ***!
+  \**************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _httpConfig = _interopRequireDefault(__webpack_require__(/*! @/common/http-config.js */ 27));
-var _commonFunction = _interopRequireDefault(__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module '@/utils/common-function.js'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())));
-var _storageConfig = _interopRequireDefault(__webpack_require__(/*! @/common/storage-config.js */ 28));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _httpConfig = _interopRequireDefault(__webpack_require__(/*! @/common/http-config.js */ 19));
+var _commonFunction = _interopRequireDefault(__webpack_require__(/*! @/utils/common-function.js */ 20));
+var _storageConfig = _interopRequireDefault(__webpack_require__(/*! @/common/storage-config.js */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 var _success = '00';
 var loadingTitle = '请稍后...';
 var tokenError = 'X1';
@@ -8755,71 +8743,95 @@ var realPost = function realPost(request, interfaceName, token, hideLoading, hid
     * param token token
     * param hideLoading 是否隐藏loading ios如果下拉和loading均存在时，会造成首次下拉回弹超过标题！
     */
+// const realGet=(request,interfaceName,token,hideLoading,hideError)=>{
+// 	return new Promise((resolve,reject)=>{
+// 		if(token)
+// 			request.token=token;
+// 		console.log("request：------"+JSON.stringify(request))
+// 		console.log("request url:------"+httpConfig.requestUrl+interfaceName)
+// 		if(!hideLoading){
+// 			uni.showLoading({
+// 				title:loadingTitle,
+// 				mask:true
+// 			})
+// 		}
+// 		uni.request({
+// 				url:httpConfig.requestUrl+interfaceName,
+// 				data:request,
+// 				method: 'GET',
+// 				success(res) {
+// 					res=res.data;
+// 					console.log("response:----"+JSON.stringify(res))
+// 					uni.hideLoading();
+// 					if(res.code==success){
+// 						if(res.token){
+// 							commonFuntcion.saveStorage(storageConfig.tokenStorage,res.token)
+// 								.then(()=>{
+// 									resolve(res.data);
+// 								}).catch(()=>{
+// 								reject('token保存失败!')
+// 								if(!hideError)
+// 									showFaile('token保存失败!')
+// 							})
+// 						}
+//
+// 						// 再判rc内部
+// 						var data=res.data;
+// 						if(data.rc==success){
+// 							if(data.token){
+// 								commonFuntcion.saveStorage(storageConfig.tokenStorage,data.token)
+// 									.then(()=>{
+// 										resolve(res.data);
+// 									}).catch(()=>{
+// 									reject('token保存失败!')
+// 									if(!hideError)
+// 										showFaile('token保存失败!')
+// 								})
+// 							}else{
+// 								resolve(res.data);
+// 							}
+// 						}else{
+// 							if(data.rc==tokenError){
+// 								commonFuntcion.removeStorageByKey(storageConfig.tokenStorage);
+// 							}
+// 							reject(data);
+// 							if(!hideError)
+// 								showFaile(data.rcDetail)
+// 						}
+// 					}
+// 					else{
+// 						if(res.code==tokenError){
+// 							commonFuntcion.removeStorageByKey(storageConfig.tokenStorage);
+// 						}
+// 						reject(res.message)
+// 						if(!hideError)
+// 							showFaile(res.message)
+//
+// 					}
+// 				},
+// 				fail(res) {
+// 					console.log("response网络异常:----"+JSON.stringify(res))
+// 					uni.hideLoading();
+// 					reject('网络异常!')
+// 					showFaile('网络异常!')
+// 				}
+// 			}
+// 		)
+// 	})
+// }
 var realGet = function realGet(request, interfaceName, token, hideLoading, hideError) {
   return new Promise(function (resolve, reject) {
     if (token)
     request.token = token;
     console.log("request：------" + JSON.stringify(request));
     console.log("request url:------" + _httpConfig.default.requestUrl + interfaceName);
-    if (!hideLoading) {
-      uni.showLoading({
-        title: loadingTitle,
-        mask: true });
-
-    }
     uni.request({
       url: _httpConfig.default.requestUrl + interfaceName,
       data: request,
       method: 'GET',
       success: function success(res) {
-        res = res.data;
+        resolve(res.data);
         console.log("response:----" + JSON.stringify(res));
-        uni.hideLoading();
-        if (res.code == _success) {
-          if (res.token) {
-            _commonFunction.default.saveStorage(_storageConfig.default.tokenStorage, res.token).
-            then(function () {
-              resolve(res.data);
-            }).catch(function () {
-              reject('token保存失败!');
-              if (!hideError)
-              showFaile('token保存失败!');
-            });
-          }
-
-          // 再判rc内部
-          var data = res.data;
-          if (data.rc == _success) {
-            if (data.token) {
-              _commonFunction.default.saveStorage(_storageConfig.default.tokenStorage, data.token).
-              then(function () {
-                resolve(res.data);
-              }).catch(function () {
-                reject('token保存失败!');
-                if (!hideError)
-                showFaile('token保存失败!');
-              });
-            } else {
-              resolve(res.data);
-            }
-          } else {
-            if (data.rc == tokenError) {
-              _commonFunction.default.removeStorageByKey(_storageConfig.default.tokenStorage);
-            }
-            reject(data);
-            if (!hideError)
-            showFaile(data.rcDetail);
-          }
-        } else
-        {
-          if (res.code == tokenError) {
-            _commonFunction.default.removeStorageByKey(_storageConfig.default.tokenStorage);
-          }
-          reject(res.message);
-          if (!hideError)
-          showFaile(res.message);
-
-        }
       },
       fail: function fail(res) {
         console.log("response网络异常:----" + JSON.stringify(res));
@@ -8831,6 +8843,7 @@ var realGet = function realGet(request, interfaceName, token, hideLoading, hideE
 
   });
 };
+
 /**
     * param interface 接口名
     * param request  请求体
@@ -9018,27 +9031,40 @@ var postNoAutoLogin = function postNoAutoLogin(request, interfaceName, hideLoadi
 /**
     * 跳转自动登录
     */
+// const post = (request,interfaceName,hideLoading,hideError)=>{
+// 	return new Promise((resolve,inject)=>{
+// 		commonFuntcion.checkStorgeHasUser(true).then(token=>{
+// 			realPost(request,interfaceName,token,hideLoading,hideError).then((res)=>{
+// 				resolve(res);
+// 			}).catch((reason)=>{inject(reason)})
+// 		}).catch(()=>{inject('尚未登录!')})
+// 	})
+// }
 var post = function post(request, interfaceName, hideLoading, hideError) {
   return new Promise(function (resolve, inject) {
-    _commonFunction.default.checkStorgeHasUser(true).then(function (token) {
-      realPost(request, interfaceName, token, hideLoading, hideError).then(function (res) {
-        resolve(res);
-      }).catch(function (reason) {inject(reason);});
-    }).catch(function () {inject('尚未登录!');});
+    realPost(request, interfaceName, hideLoading, hideError).then(function (res) {
+      resolve(res);
+    }).catch(function (reason) {inject(reason);});
   });
 };
-
 
 /**
     * 跳转自动登录get
     */
+// const get = (request,interfaceName,hideLoading)=>{
+// 	return new Promise((resolve,inject)=>{
+// 		commonFuntcion.checkStorgeHasUser(true).then(token=>{
+// 			realGet(request,interfaceName,token,hideLoading).then((res)=>{
+// 				resolve(res);
+// 			}).catch((reason)=>{inject(reason)})
+// 		}).catch(()=>{inject('尚未登录!')})
+// 	})
+// }
 var get = function get(request, interfaceName, hideLoading) {
   return new Promise(function (resolve, inject) {
-    _commonFunction.default.checkStorgeHasUser(true).then(function (token) {
-      realGet(request, interfaceName, token, hideLoading).then(function (res) {
-        resolve(res);
-      }).catch(function (reason) {inject(reason);});
-    }).catch(function () {inject('尚未登录!');});
+    realGet(request, interfaceName, hideLoading).then(function (res) {
+      resolve(res);
+    }).catch(function (reason) {inject(reason);});
   });
 };
 
@@ -9121,10 +9147,10 @@ var postFile = function postFile(filePath, name, username, password, hideLoading
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
-/* 27 */
-/*!**************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/HBuilderProjects/gupiao/common/http-config.js ***!
-  \**************************************************************************************/
+/* 19 */
+/*!****************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/HBuilderProjects/gupiaoui/common/http-config.js ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -9136,10 +9162,16 @@ var dateSelectFormat = 'yyyy-MM-dd';
 var dateApiFormat = 'yyyy/MM/dd';
 var dateApiFormatTime = 'yyyy/MM/dd HH:mm:ss';
 var version = '1.2.0';
+var testUrl = 'http://localhost:8088';
+var releaseUrl = 'https://ss-pm.shijicloud.com/vip-api';
+//请求地址
+var requestUrl = isTest ? testUrl : releaseUrl;
+//接口名
 var interfaces = {
   gupiao: '/gupiao/findAll' };var _default =
 
 {
+  requestUrl: requestUrl,
   dateTimeformat: dateTimeformat,
   dateformat: dateformat,
   dateSelectFormat: dateSelectFormat,
@@ -9147,10 +9179,304 @@ var interfaces = {
   interfaces: interfaces };exports.default = _default;
 
 /***/ }),
-/* 28 */
-/*!*****************************************************************************************!*\
-  !*** C:/Users/Administrator/Documents/HBuilderProjects/gupiao/common/storage-config.js ***!
-  \*****************************************************************************************/
+/* 20 */
+/*!*******************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/HBuilderProjects/gupiaoui/utils/common-function.js ***!
+  \*******************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = exports.getRandomMerchantTxnNumber = void 0;var _storageConfig = _interopRequireDefault(__webpack_require__(/*! @/common/storage-config.js */ 21));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+
+var toLogin = function toLogin() {
+  uni.reLaunch({
+    url: '/pages/login/login' });
+
+};
+
+/**
+    * 随机生成订单号
+    */
+var getRandomMerchantTxnNumber = function getRandomMerchantTxnNumber() {
+  var mydate = new Date();
+  var result = mydate.getFullYear() + '' + (mydate.getMonth() + 1 > 9 ? mydate.getMonth() + 1 : '0' + (mydate.getMonth() + 1)) + '' + (mydate.getDate() > 9 ? mydate.getDate() : '0' + mydate.getDate()) + mydate.getHours() + '' +
+  mydate.getMinutes() + '' + mydate.getSeconds() + '' + Math.floor((1 + Math.random()) * 1000000);
+  return result + '';
+
+};
+/**
+    * 检查本地缓存是否有用户对象
+    */exports.getRandomMerchantTxnNumber = getRandomMerchantTxnNumber;
+var checkStorgeHasUser = function checkStorgeHasUser(autoLogin) {
+  return new Promise(function (resolve, reject) {
+    uni.getStorage({
+      key: _storageConfig.default.tokenStorage,
+      success: function success(res) {
+        if (res.data) {
+          resolve(res.data);
+        } else {
+          reject('本地缓存无登录信息,跳转登录');
+          if (autoLogin)
+          toLogin();
+        }
+      }, fail: function fail() {
+        reject('本地缓存无登录信息,跳转登录');
+        if (autoLogin)
+        toLogin();
+      } });
+
+  });
+};
+/**
+    * 页面跳转
+    * @param path 跳转的路径
+    */
+var toPage = function toPage(path) {
+  return new Promise(function (resolve, inject) {
+    uni.navigateTo({
+      url: path,
+      success: function success() {
+        resolve();
+      },
+      fail: function fail() {
+        uni.showToast({
+          icon: 'none',
+          title: '功能建设中!敬请期待' });
+
+      } });
+
+  });
+};
+
+
+
+/**
+    * 存入缓存
+    */
+var saveStorage = function saveStorage(key, data) {
+  return new Promise(function (resolve, reject) {
+    uni.setStorage({
+      key: key,
+      data: data,
+      success: function success() {
+        resolve();
+      },
+      fail: function fail() {
+        reject();
+      } });
+
+  });
+};
+/**
+    * 删除缓存
+    */
+var removeStorageByKey = function removeStorageByKey(key) {
+  return new Promise(function (resolve, reject) {
+    uni.removeStorage({
+      key: key,
+      success: function success() {
+        resolve();
+      },
+      fail: function fail() {
+        reject();
+      } });
+
+  });
+};
+
+/**
+    * 取出缓存内容
+    */
+var getStorageByKey = function getStorageByKey(key) {
+  return new Promise(function (resolve, inject) {
+    uni.getStorage({
+      key: key,
+      success: function success(res) {
+        resolve(res.data);
+      }, fail: function fail() {
+        inject('获取' + key + '失败');
+      } });
+
+  });
+};
+
+/**
+    * 关闭自动登录自动登录
+    */
+var closeAutoLogin = function closeAutoLogin() {
+  return new Promise(function (resolve, inject) {
+    uni.removeStorage({
+      key: 'auto-login',
+      success: function success() {
+        resolve();
+      },
+      fail: function fail() {
+        inject();
+      } });
+
+  });
+};
+/**
+    * 打开自动登录
+    */
+var openAutoLogin = function openAutoLogin() {
+  return new Promise(function (resolve, inject) {
+    uni.setStorage({
+      key: 'auto-login',
+      data: true,
+      fail: function fail() {
+        inject();
+      },
+      success: function success() {
+        resolve();
+      } });
+
+  });
+};
+/**
+    * 检查是否开启自动登录
+    */
+var canAutoLogin = function canAutoLogin() {
+  return new Promise(function (resolve, inject) {
+    uni.getStorage({
+      key: 'auto-login',
+      success: function success(res) {
+        if (res.data) {
+          resolve();
+        }
+      },
+      fail: function fail(res) {
+        inject();
+      } });
+
+  });
+};
+
+/**
+    * 返回非N的所有内容
+    * @return array
+    */
+var filterArray = function filterArray(array, n) {
+  Array.filter(function (item) {
+    return item !== n;
+  });
+};
+
+/**
+    * 提示
+    */
+var showToast = function showToast(title) {
+  uni.showToast({
+    icon: 'none',
+    title: title });
+
+};
+/**
+    * 深拷贝数组
+    */
+var deepClone = function deepClone(initalObj) {
+  var obj = [];
+  if (typeof initalObj !== 'object') {
+    return initalObj;
+  }
+  for (var key in initalObj) {
+    if (typeof initalObj[key] === 'object') {
+      //对数组特殊处理
+      if (Array.isArray(initalObj[key])) {
+        //用map方法返回新数组，将数组中的元素递归
+        obj[key] = initalObj[key].map(function (item) {return deepClone(item);});
+      } else {
+        //递归返回新的对象
+        obj[key] = deepClone(initalObj[key]);
+      }
+    } else if (typeof initalObj[key] === 'function') {
+      //返回新函数
+      obj[key] = initalObj[key].bind(obj);
+    } else {
+      //基本类型直接返回
+      obj[key] = initalObj[key];
+    }
+  }
+  return obj;
+};
+/**
+    * 密码必须为字母加数字且长度不小于8位
+    */
+var checkPassword = function checkPassword(password) {//必须为字母加数字且长度不小于8位
+  var str = password;
+  if (str == null || str.length < 8) {
+    return false;
+  }
+  var reg1 = new RegExp(/^[0-9A-Za-z]+$/);
+  if (!reg1.test(str)) {
+    return false;
+  }
+  var reg = new RegExp(/[A-Za-z].*[0-9]|[0-9].*[A-Za-z]/);
+  if (reg.test(str)) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+var changeDay = function changeDay(org, days, timeFormat) {
+  var nowDate = new Date(org);
+  nowDate.setDate(nowDate.getDate() + days);
+  return nowDate.Format(timeFormat);
+};
+var compare = function compare(obj1, obj2) {
+  var props1 = Object.getOwnPropertyNames(obj1);
+  var props2 = Object.getOwnPropertyNames(obj2);
+  if (props1.length != props2.length) {
+    return false;
+  }
+  for (var i = 0, max = props1.length; i < max; i++) {
+    var propName = props1[i];
+    if (obj1[propName] !== obj2[propName]) {
+      return false;
+    }
+  }
+  return true;
+};
+
+/**
+    * 检查是否为2位小数
+    */
+var checkAmtFormat = function checkAmtFormat(number) {
+  var reg = /^(?!0+(?:\.0+)?$)(?:[1-9]\d*|0)(?:\.\d{1,2})?$/;
+  var result = reg.test(number);
+  if (!result) {
+    return false;
+  } else {
+    return true;
+  }
+};var _default =
+
+
+{
+  compare: compare,
+  toPage: toPage,
+  checkStorgeHasUser: checkStorgeHasUser,
+  closeAutoLogin: closeAutoLogin,
+  openAutoLogin: openAutoLogin,
+  canAutoLogin: canAutoLogin,
+  saveStorage: saveStorage,
+  getStorageByKey: getStorageByKey,
+  showToast: showToast,
+  getRandomMerchantTxnNumber: getRandomMerchantTxnNumber,
+  deepClone: deepClone,
+  removeStorageByKey: removeStorageByKey,
+  checkPassword: checkPassword,
+  changeDay: changeDay,
+  checkAmtFormat: checkAmtFormat };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 21 */
+/*!*******************************************************************************************!*\
+  !*** C:/Users/Administrator/Documents/HBuilderProjects/gupiaoui/common/storage-config.js ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 

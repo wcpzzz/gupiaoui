@@ -1,1 +1,1 @@
-<view class="content"><view class="text-area"><text class="title">{{title}}</text></view><block wx:for="{{data}}" wx:for-item="item" wx:for-index="index" wx:key="index"><view><view>{{''+item.atom_ID+"\n\t\t\t"+item.atom_NAME+"\n\t\t\t"+item.atom_SUMMARY+''}}</view></view></block></view>
+<div class="content"><div class="text-area"><text class="title">{{title}}</text></div><block wx:for="{{data}}" wx:for-item="item" wx:for-index="index" wx:key="index"><div><div>{{''+item.atom_ID+"\n\t\t\t"+item.atom_NAME+"\n\t\t\t"+item.atom_SUMMARY+''}}</div></div></block></div>

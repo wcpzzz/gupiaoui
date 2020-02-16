@@ -11,7 +11,8 @@ const releaseUrl='https://ss-pm.shijicloud.com/vip-api'
 const requestUrl=isTest?testUrl:releaseUrl
 //接口名
 const interfaces={
-	gupiao:'/gupiao/findAll'
+	gupiao:'/gupiao/findAll',
+	login:'/gupiao/login'
 }
 export default{
 	requestUrl,

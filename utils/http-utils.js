@@ -83,82 +83,82 @@ const showFaile=(reason)=>{
  * param token token
  * param hideLoading 是否隐藏loading ios如果下拉和loading均存在时，会造成首次下拉回弹超过标题！
  */
-const realPost=(request,interfaceName,token,hideLoading,hideError)=>{
-	return new Promise((resolve,reject)=>{
-			if(token)
-				request.token=token;
-			console.log("request：------"+JSON.stringify(request))
-			console.log("request url:------"+httpConfig.requestUrl+interfaceName)
-			if(!hideLoading){
-				uni.showLoading({
-					title:loadingTitle,
-					mask:true
-				})
-			}
-			uni.request({
-				url:httpConfig.requestUrl+interfaceName,
-				data:request,
-				method: 'POST',
-				success(res) {
-					res=res.data;
-					console.log("response:----"+JSON.stringify(res))
-					uni.hideLoading();
-					if(res.code==success){
-						if(res.token){
-							commonFuntcion.saveStorage(storageConfig.tokenStorage,res.token)
-							.then(()=>{
-								resolve(res.data);
-							}).catch(()=>{
-								reject('token保存失败!')
-								if(!hideError)
-								showFaile('token保存失败!')
-							})
-						}
-
-						// 再判rc内部
-						var data=res.data;
-						if(data.rc==success){
-							if(data.token){
-								commonFuntcion.saveStorage(storageConfig.tokenStorage,data.token)
-								.then(()=>{
-									resolve(res.data);
-								}).catch(()=>{
-									reject('token保存失败!')
-									if(!hideError)
-									showFaile('token保存失败!')
-								})
-							}else{
-								resolve(res.data);
-							}
-						}else{
-							if(data.rc==tokenError){
-								commonFuntcion.removeStorageByKey(storageConfig.tokenStorage);
-							}
-							reject(data);
-							if(!hideError)
-							showFaile(data.rcDetail)
-						}
-					}
-					else{
-						if(res.code==tokenError){
-							commonFuntcion.removeStorageByKey(storageConfig.tokenStorage);
-						}
-						reject(res.message)
-						if(!hideError)
-						showFaile(res.message)
-
-					}
-				},
-				fail(res) {
-					console.log("response网络异常:----"+JSON.stringify(res))
-					uni.hideLoading();
-					reject('网络异常!')
-					showFaile('网络异常!')
-				}
-			}
-		)
-	})
-}
+// const realPost=(request,interfaceName,token,hideLoading,hideError)=>{
+// 	return new Promise((resolve,reject)=>{
+// 			if(token)
+// 				request.token=token;
+// 			console.log("request：------"+JSON.stringify(request))
+// 			console.log("request url:------"+httpConfig.requestUrl+interfaceName)
+// 			if(!hideLoading){
+// 				uni.showLoading({
+// 					title:loadingTitle,
+// 					mask:true
+// 				})
+// 			}
+// 			uni.request({
+// 				url:httpConfig.requestUrl+interfaceName,
+// 				data:request,
+// 				method: 'POST',
+// 				success(res) {
+// 					res=res.data;
+// 					console.log("response:----"+JSON.stringify(res))
+// 					uni.hideLoading();
+// 					if(res.code==success){
+// 						if(res.token){
+// 							commonFuntcion.saveStorage(storageConfig.tokenStorage,res.token)
+// 							.then(()=>{
+// 								resolve(res.data);
+// 							}).catch(()=>{
+// 								reject('token保存失败!')
+// 								if(!hideError)
+// 								showFaile('token保存失败!')
+// 							})
+// 						}
+//
+// 						// 再判rc内部
+// 						var data=res.data;
+// 						if(data.rc==success){
+// 							if(data.token){
+// 								commonFuntcion.saveStorage(storageConfig.tokenStorage,data.token)
+// 								.then(()=>{
+// 									resolve(res.data);
+// 								}).catch(()=>{
+// 									reject('token保存失败!')
+// 									if(!hideError)
+// 									showFaile('token保存失败!')
+// 								})
+// 							}else{
+// 								resolve(res.data);
+// 							}
+// 						}else{
+// 							if(data.rc==tokenError){
+// 								commonFuntcion.removeStorageByKey(storageConfig.tokenStorage);
+// 							}
+// 							reject(data);
+// 							if(!hideError)
+// 							showFaile(data.rcDetail)
+// 						}
+// 					}
+// 					else{
+// 						if(res.code==tokenError){
+// 							commonFuntcion.removeStorageByKey(storageConfig.tokenStorage);
+// 						}
+// 						reject(res.message)
+// 						if(!hideError)
+// 						showFaile(res.message)
+//
+// 					}
+// 				},
+// 				fail(res) {
+// 					console.log("response网络异常:----"+JSON.stringify(res))
+// 					uni.hideLoading();
+// 					reject('网络异常!')
+// 					showFaile('网络异常!')
+// 				}
+// 			}
+// 		)
+// 	})
+// }
 
 /**
  * param interface 接口名
@@ -266,7 +266,30 @@ const realGet=(request,interfaceName,token,hideLoading,hideError)=>{
 		)
 	})
 }
-
+const realPost=(request,interfaceName,token,hideLoading,hideError)=>{
+	return new Promise((resolve,reject)=>{
+		if(token)
+			request.token=token;
+		console.log("request：------"+JSON.stringify(request))
+		console.log("request url:------"+httpConfig.requestUrl+interfaceName)
+		uni.request({
+				url:httpConfig.requestUrl+interfaceName,
+				data:request,
+				method: 'POST',
+				success(res) {
+					resolve(res.data)
+					console.log("response:----"+JSON.stringify(res))
+				},
+				fail(res) {
+					console.log("response网络异常:----"+JSON.stringify(res))
+					uni.hideLoading();
+					reject('网络异常!')
+					showFaile('网络异常!')
+				}
+			}
+		)
+	})
+}
 /**
  * param interface 接口名
  * param request  请求体

@@ -1,16 +1,16 @@
 <template>
-	<view class="content">
-		<view class="text-area">
+	<div class="content">
+		<div class="text-area">
 			<text class="title">{{title}}</text>
-		</view>
-		<view v-for="(item,index) in data" :key="index">
-			<view>
+		</div>
+		<div v-for="(item,index) in data" :key="index">
+			<div>
 				{{item.atom_ID}}
 				{{item.atom_NAME}}
 				{{item.atom_SUMMARY}}
-			</view>
-		</view>
-	</view>
+			</div>
+		</div>
+	</div>
 </template>
 
 <script>

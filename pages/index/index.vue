@@ -18,7 +18,7 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello',
+				title: 'Hello2',
 				data:[],
 			}
 		},
